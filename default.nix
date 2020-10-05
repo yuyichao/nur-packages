@@ -39,6 +39,8 @@ rec {
     # asteval = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/asteval { };
     # nose-timer = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/nose-timer { };
     oitg = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/oitg { };
+    openfermion = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/openfermion { inherit pubchempy; };
+    openfermion-cirq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/openfermion-cirq { inherit cirq openfermion; };
     pyscf = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyscf { inherit libcint xcfun; };
     pygsti = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pygsti { inherit cvxpy; };
     pygsti-cirq = pygsti.overridePythonAttrs (oldAttrs: {
@@ -58,6 +60,8 @@ rec {
     openfermion = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/openfermion { inherit cirq pubchempy; };
     # openfermion-cirq has been deprecated. Its functionality is now rolled into openfermion as of v1.0
     # setuptools-rust has been removed b/c it has been integrated into nixpkgs. That probably has a better derivation to copy
+    pyquil = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyquil { inherit rpcq; };
+    rpcq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/rpcq { };
     tweedledum = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/tweedledum { };
 
     # VISA & Lab Instrument control
