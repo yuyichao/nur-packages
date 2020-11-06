@@ -22,7 +22,6 @@ rec {
 
   # New/unstable packages below
   libcint = pkgs.callPackage ./pkgs/libraries/libcint { };
-  xcfun = pkgs.callPackage ./pkgs/libraries/xcfun { };
   muparserx = pkgs.callPackage ./pkgs/libraries/muparserx { };
   tuna = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/tuna { };
   libtweedledum = pkgs.callPackage ./pkgs/libraries/tweedledum { };
