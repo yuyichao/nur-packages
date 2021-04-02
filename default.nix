@@ -123,6 +123,7 @@ rec {
     qiskit-finance = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-finance { inherit qiskit-optimization qiskit-terra qiskit-aer fastdtw yfinance; };
     qiskit-optimization = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-optimization { inherit pylatexenc qiskit-terra qiskit-aer docplex; };
     qiskit-machine-learning = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-machine-learning { inherit qiskit-terra qiskit-aer fastdtw; };
+    qiskit-nature = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-nature { inherit qiskit-terra pylatexenc retworkx pyscf; };
 
     # Raspberry Pi Packages
     colorzero = pkgs.python3Packages.callPackage ./pkgs/raspberrypi/colorzero { };
