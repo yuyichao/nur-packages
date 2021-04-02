@@ -120,6 +120,7 @@ rec {
     };
     qiskit-terraNoVisual = qiskit-terra.override { withVisualization = false; };
     qiskit-ibmq-providerNoVisual = qiskit-ibmq-provider.override { withVisualization = false; qiskit-terra = qiskit-terraNoVisual; matplotlib = null; };
+    qiskit-optimization = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-optimization { inherit pylatexenc qiskit-terra qiskit-aer docplex; };
 
     # Raspberry Pi Packages
     colorzero = pkgs.python3Packages.callPackage ./pkgs/raspberrypi/colorzero { };
