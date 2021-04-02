@@ -41,8 +41,6 @@ rec {
     autoray = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/autoray { };
     # nose-timer = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/nose-timer { };
     oitg = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/oitg { };
-    openfermion = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/openfermion { inherit pubchempy; };
-    openfermion-cirq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/openfermion-cirq { inherit cirq openfermion; };
     pyscf = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyscf { inherit libcint xcfun; };
     pygsti = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pygsti { inherit cvxpy; };
     pygsti-cirq = pygsti.overridePythonAttrs (oldAttrs: {
