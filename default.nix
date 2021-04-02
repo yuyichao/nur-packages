@@ -37,7 +37,7 @@ rec {
 
   python3Packages = pkgs.recurseIntoAttrs rec {
     # New packages NOT in NixOS/nixpkgs (and likely never will be)
-    # asteval = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/asteval { };
+    asteval = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/asteval { };
     autoray = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/autoray { };
     # nose-timer = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/nose-timer { };
     oitg = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/oitg { };
