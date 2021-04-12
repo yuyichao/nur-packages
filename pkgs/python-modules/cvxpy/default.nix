@@ -9,6 +9,7 @@
 , osqp
 , scipy
 , scs
+, useOpenmp ? true
   # Check inputs
 , pytestCheckHook
 }:
@@ -16,6 +17,7 @@
 buildPythonPackage rec {
   pname = "cvxpy";
   version = "1.1.12";
+  format = "pyproject";
 
   disabled = pythonOlder "3.5";
 
@@ -32,6 +34,11 @@ buildPythonPackage rec {
     scipy
     scs
   ];
+
+  preBuild = lib.optional useOpenmp ''
+    export CFLAGS="-fopenmp"
+    export LDFLAGS="-lgomp"
+  '';
 
   checkInputs = [ pytestCheckHook ];
   dontUseSetuptoolsCheck = true;
