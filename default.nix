@@ -116,7 +116,17 @@ rec {
       inherit ipyvuetify pproxy qiskit-terra qiskit-aer;
     };
     qiskit = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit {
-      inherit qiskit-aer qiskit-terra qiskit-ignis qiskit-aqua qiskit-ibmq-provider;
+      inherit
+        qiskit-aer
+        qiskit-terra
+        qiskit-ignis
+        qiskit-aqua
+        qiskit-ibmq-provider
+        qiskit-finance
+        qiskit-machine-learning
+        qiskit-nature
+        qiskit-optimization
+        ;
     };
     qiskit-terraNoVisual = qiskit-terra.override { withVisualization = false; };
     qiskit-ibmq-providerNoVisual = qiskit-ibmq-provider.override { withVisualization = false; qiskit-terra = qiskit-terraNoVisual; matplotlib = null; };
