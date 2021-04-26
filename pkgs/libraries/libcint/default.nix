@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "libcint";
-  version = "4.1.3";
+  version = "4.3.0";
 
   src = fetchFromGitHub {
     owner = "sunqm";
     repo = "libcint";
     rev = "v${version}";
-    sha256 = "0dk0100r0nw25xkslvnbn52jdqz9j27v93gjj4fmxsz67kykmc74";
+    sha256 = "084fc6p987l71fy24znkmznd1q828qirx9i5sp2hnqa79z4hx7mw";
   };
 
   nativeBuildInputs = [ cmake ];
