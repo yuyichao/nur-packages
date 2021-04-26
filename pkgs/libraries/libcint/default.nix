@@ -4,7 +4,7 @@
 , cmake
 , openblas
   # Check Inputs
-, python
+, python3
 }:
 
 stdenv.mkDerivation rec {
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
 
-  checkInputs = [ (python.withPackages(ps: [ ps.numpy ])) ];
+  checkInputs = [ (python3.withPackages(ps: [ ps.numpy ])) ];
 
   meta = with lib; {
     description = "General GTO integrals for quantum chemistry";
