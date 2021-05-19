@@ -121,6 +121,8 @@ buildPythonPackage rec {
     "test_cx_equivalence"  # Fails due to flaky test
   ] ++ lib.optionals (!withClassicalFunctionCompiler) [
     "TestPhaseOracle"
+  ] ++ lib.optionals (lib.versionAtLeast matplotlib.version "3.4.0") [
+    "test_plot_circuit_layout"
   ]
   # Disabling slow tests for Travis build constraints
   ++ [
