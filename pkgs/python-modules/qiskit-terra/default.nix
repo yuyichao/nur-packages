@@ -37,6 +37,7 @@
 , nbformat
 , nbconvert
 , pytestCheckHook
+, pytest_xdist
 , python
 }:
 
@@ -94,6 +95,7 @@ buildPythonPackage rec {
     hypothesis
     nbformat
     nbconvert
+    pytest_xdist
   ] ++ lib.optionals (!withVisualization) visualizationPackages;
   dontUseSetuptoolsCheck = true;  # can't find setup.py, so fails. tested by pytest
 
