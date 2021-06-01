@@ -90,6 +90,7 @@ let
 
     nativeBuildInputs = with rustPlatform; [ cargoSetupHook maturinBuildHook ];
 
+    pythonImportsCheck = [ "retworkx" ];
     checkInputs = installCheckInputs;
   };
 in
