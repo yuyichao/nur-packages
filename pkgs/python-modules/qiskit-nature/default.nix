@@ -52,7 +52,9 @@ buildPythonPackage rec {
   preCheck = "pushd $TMP/$sourceRoot";
   postCheck = "popd";
 
-  pytestFlagsArray = lib.optionals (!withPyscf) [
+  pytestFlagsArray = [
+    "--durations=10"
+  ] ++ lib.optionals (!withPyscf) [
     "--ignore=test/algorithms/excited_state_solvers/test_excited_states_eigensolver.py"
   ];
 

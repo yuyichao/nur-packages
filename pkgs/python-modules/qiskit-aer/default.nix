@@ -106,6 +106,7 @@ buildPythonPackage rec {
     "qiskit.providers.aer.backends.qasm_simulator"
     "qiskit.providers.aer.backends.controller_wrappers" # Checks C++ files built correctly. Only exists if built & moved to output
   ];
+  pytestFlagsArray = [ "--durations=10" ];
   disabledTests = [
     # these fail for some builds. Haven't been able to reproduce error locally.
     "test_kraus_gate_noise"

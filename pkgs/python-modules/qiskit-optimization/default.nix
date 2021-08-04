@@ -49,6 +49,7 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "qiskit_optimization" ];
   preCheck = "pushd $TMP/$sourceRoot";
   postCheck = "popd";
+  pytestFlagsArray = [ "--durations=10" ];
 
   meta = with lib; {
     description = "Software for developing quantum computing programs";

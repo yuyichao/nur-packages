@@ -111,6 +111,7 @@ buildPythonPackage rec {
     "--ignore=test/randomized/"
     # These tests consistently fail on GitHub Actions build
     "--ignore=test/python/quantum_info/operators/test_random.py"
+    "--durations=10"
   ];
   disabledTests = [
     # Flaky tests
