@@ -15,6 +15,7 @@
 , python-dateutil
 , retworkx
 , scipy
+, scikit-quant ? null
 , symengine
 , sympy
 , tweedledum
@@ -80,6 +81,7 @@ buildPythonPackage rec {
     python-dateutil
     retworkx
     scipy
+    scikit-quant
     symengine
     sympy
     tweedledum
