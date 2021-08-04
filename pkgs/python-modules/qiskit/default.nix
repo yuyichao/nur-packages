@@ -8,14 +8,28 @@
 , qiskit-ibmq-provider
 , qiskit-ignis
 , qiskit-terra
+  # Optional inputs
+, withOptionalPackages ? true
+, qiskit-finance
+, qiskit-machine-learning
+, qiskit-nature
+, qiskit-optimization
   # Check Inputs
 , pytestCheckHook
 }:
 
+let
+  optionalQiskitPackages = [
+    qiskit-finance
+    qiskit-machine-learning
+    qiskit-nature
+    qiskit-optimization
+  ];
+in
 buildPythonPackage rec {
   pname = "qiskit";
   # NOTE: This version denotes a specific set of subpackages. See https://qiskit.org/documentation/release_notes.html#version-history
-  version = "0.25.0";
+  version = "0.27.0";
 
   disabled = pythonOlder "3.6";
 
@@ -23,7 +37,7 @@ buildPythonPackage rec {
     owner = "Qiskit";
     repo = "qiskit";
     rev = version;
-    sha256 = "0kaa1pc4fi90xasr1c32j71363j1pipmrl0vgd0cy5ijf1vkm4x4";
+    sha256 = "sha256-3QkzIZWv97dvBB5Kq/kU1y3h8VJ9EG8tINC4nzG0Ymw=";
   };
 
   propagatedBuildInputs = [
@@ -32,7 +46,7 @@ buildPythonPackage rec {
     qiskit-ibmq-provider
     qiskit-ignis
     qiskit-terra
-  ];
+  ] ++ lib.optionals withOptionalPackages optionalQiskitPackages;
 
   checkInputs = [ pytestCheckHook ];
   dontUseSetuptoolsCheck = true;

@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{ rawpkgs ? import <nixpkgs> { } }:
 
 rec {
   # The `lib`, `modules`, and `overlay` names are special
@@ -15,7 +15,7 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   # NOTE: default pkgs to updated versions as required by packages
-  # pkgs = rawpkgs.appendOverlays [ overlays.python-updates ];
+  pkgs = rawpkgs.appendOverlays [ overlays.python-updates ];
 
   # Packages/updates accepted to nixpkgs/master, but need the update
   lib-scs = pkgs.callPackage ./pkgs/libraries/scs { };
@@ -65,13 +65,14 @@ rec {
     quimb = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/quimb { inherit autoray; };
     rpcq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/rpcq { };
     tweedledum = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/tweedledum { inherit libtweedledum; };
+    olsq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/olsq { inherit cirq qiskit-terra qiskit-ibmq-provider; };
 
     # VISA & Lab Instrument control
     pyvisa = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyvisa { };
     pyvisa-py = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyvisa-py { inherit pyvisa; };
 
     # More recent version than in Nixpkgs
-    cirq = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/cirq { withContribRequires = false; inherit pyquil quimb; };
+    inherit (pkgs.python3.pkgs.callPackage ./pkgs/python-modules/cirq { }) cirq-core cirq-google cirq;
     cvxpy = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/cvxpy { inherit ecos osqp scs; };
     ecos = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/ecos { };
     qdldl = pkgs.python3Packages.callPackage ./pkgs/python-modules/qdldl { };
@@ -116,10 +117,25 @@ rec {
       inherit ipyvuetify pproxy qiskit-terra qiskit-aer;
     };
     qiskit = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit {
-      inherit qiskit-aer qiskit-terra qiskit-ignis qiskit-aqua qiskit-ibmq-provider;
+      inherit
+        qiskit-aer
+        qiskit-terra
+        qiskit-ignis
+        qiskit-aqua
+        qiskit-ibmq-provider
+        qiskit-finance
+        qiskit-machine-learning
+        qiskit-nature
+        qiskit-optimization
+        ;
     };
     qiskit-terraNoVisual = qiskit-terra.override { withVisualization = false; };
     qiskit-ibmq-providerNoVisual = qiskit-ibmq-provider.override { withVisualization = false; qiskit-terra = qiskit-terraNoVisual; matplotlib = null; };
+    qiskit-finance = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-finance { inherit qiskit-optimization qiskit-terra qiskit-aer fastdtw yfinance; };
+    qiskit-optimization = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-optimization { inherit pylatexenc qiskit-terra qiskit-aer docplex; };
+    qiskit-machine-learning = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-machine-learning { inherit qiskit-terra qiskit-aer fastdtw; };
+    qiskit-nature = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-nature { inherit qiskit-terra pylatexenc retworkx pyscf; };
+    qiskit-ode = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/qiskit-ode { inherit qiskit-terra; };
 
     # Raspberry Pi Packages
     colorzero = pkgs.python3Packages.callPackage ./pkgs/raspberrypi/colorzero { };

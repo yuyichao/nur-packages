@@ -2,6 +2,7 @@
 , pythonOlder
 , buildPythonPackage
 , fetchFromGitHub
+, fetchpatch
   # C Inputs
 , blas
 , openblas
@@ -27,7 +28,7 @@
 
 buildPythonPackage rec {
   pname = "qiskit-aer";
-  version = "0.8.0";
+  version = "0.8.2";
   format = "pyproject";
 
   disabled = pythonOlder "3.6";
@@ -36,15 +37,19 @@ buildPythonPackage rec {
     owner = "Qiskit";
     repo = "qiskit-aer";
     rev = version;
-    sha256 = "1ylpl1b7yh79vqkg80ax2xrhh309nszxdxc1kmbp1l7c29x7fq89";
+    sha256 = "1zcm0bdy40y0c49ycwb1qwyfq64hwx1q87cxxb07nhscmbp8rmgc";
   };
 
-  # The default check for the dl library will erroneously fail (and building with it w/ buildInputs = [... glibc ] fails too).
-  # So we use the standard ${CMAKE_DL_LIBS}, which they should have used in the first place...
-  # Builds fine with this.
+  patches = [
+    (fetchpatch {
+      # Not yet accepted: https://github.com/Qiskit/qiskit-aer/pull/1250
+      name = "qiskit-aer-pr-1250-native-cmake_dl_libs.patch";
+      url = "https://github.com/Qiskit/qiskit-aer/commit/2bf04ade3e5411776817706cf82cc67a3b3866f6.patch";
+      sha256 = "0ldwzxxfgaad7ifpci03zfdaj0kqj0p3h94qgshrd2953mf27p6z";
+    })
+  ];
+
   postPatch = ''
-    substituteInPlace CMakeLists.txt --replace "find_library(DL_LIB NAMES dl)" ""
-    substituteInPlace CMakeLists.txt --replace "''${DL_LIB}" "''${CMAKE_DL_LIBS}"
     substituteInPlace setup.py \
       --replace "'cmake!=3.17,!=3.17.0'," "" \
       --replace "'pybind11', min_version='2.6'" "'pybind11'" \
@@ -75,7 +80,9 @@ buildPythonPackage rec {
     pybind11
   ];
 
-  DISABLE_CONAN=1;
+  preBuild = ''
+    export DISABLE_CONAN=1
+  '';
 
   dontUseCmakeConfigure = true;
 

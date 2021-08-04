@@ -10,7 +10,6 @@
 , networkx
 , numpy
 , psutil
-, python
 , qiskit-ignis
 , qiskit-terra
 , quandl
@@ -33,7 +32,7 @@
 
 buildPythonPackage rec {
   pname = "qiskit-aqua";
-  version = "0.9.0";
+  version = "0.9.2";
 
   disabled = pythonOlder "3.6";
 
@@ -42,7 +41,7 @@ buildPythonPackage rec {
     owner = "Qiskit";
     repo = "qiskit-aqua";
     rev = version;
-    sha256 = "046sgv533ilg5syic4bqi6d7h3q0gmv7sbvv82abv1v2wbv9wywj";
+    sha256 = "sha256-da+7L5jkEQe/Nnzei3RBmSNHvVO7jsbQas+EGx7DTIM=";
   };
 
   # Optional packages: pyscf (see below NOTE) & pytorch. Can install via pip/nix if needed.
@@ -98,8 +97,6 @@ buildPythonPackage rec {
         "', ImportWarning)\n" \
       >> qiskit/optimization/__init__.py
   '';
-
-  postInstall = "rm -rf $out/${python.sitePackages}/docs";
 
   checkInputs = [
     pytestCheckHook

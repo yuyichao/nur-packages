@@ -4,18 +4,18 @@
 , cmake
 , openblas
   # Check Inputs
-, python
+, python3
 }:
 
 stdenv.mkDerivation rec {
   pname = "libcint";
-  version = "4.1.2";
+  version = "4.4.2";
 
   src = fetchFromGitHub {
     owner = "sunqm";
     repo = "libcint";
     rev = "v${version}";
-    sha256 = "0gb6snri647a258j59k1mv706jb53blacydlvdzdfgijcg1f7vl6";
+    sha256 = "sha256-rfbvRIdr9+I/QGmIpgm8RUAhypkUS8ms9ug4p1P26vw=";
   };
 
   nativeBuildInputs = [ cmake ];
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
 
-  checkInputs = [ (python.withPackages(ps: [ ps.numpy ])) ];
+  checkInputs = [ (python3.withPackages(ps: [ ps.numpy ])) ];
 
   meta = with lib; {
     description = "General GTO integrals for quantum chemistry";

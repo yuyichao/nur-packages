@@ -2,14 +2,13 @@
 , pythonOlder
 , buildPythonPackage
 , fetchFromGitHub
-, fetchpatch
 , antlr4-python3-runtime
-, immutables
 , lark-parser
 , networkx
 , numpy
 , rpcq
 , requests
+, retry
 , scipy
   # Check Inputs
 , pytestCheckHook
@@ -20,7 +19,7 @@
 
 buildPythonPackage rec {
   pname = "pyquil";
-  version = "2.28.0";
+  version = "3.0.0";
 
   disabled = pythonOlder "3.6";
 
@@ -28,30 +27,23 @@ buildPythonPackage rec {
     owner = "rigetti";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1m5x31jz1r5fmplk3946jpxzdc7im67j6625zhn0z14kpfgjq0fy";
+    sha256 = "sha256-XeSwxmqonj/Z/6zsQNasropnl8BH1FvqVn5v86m+4AA=";
   };
+  postPatch = ''
+    # remove numpy hard-pinning, not compatible with nixpkgs 20.09
+    substituteInPlace setup.py --replace ",>=1.20.0" ""
+  '';
 
   propagatedBuildInputs = [
     antlr4-python3-runtime
-    immutables
     lark-parser
     networkx
     numpy
-    scipy
-    rpcq
     requests
+    retry
+    rpcq
+    scipy
   ];
-
-  patches = [
-    (fetchpatch {
-      name = "pyquil-pr-1321-use-lark-parser.patch";
-      url = "https://github.com/rigetti/pyquil/commit/356f4db83d46d334e423f75583131b38ccd243d7.patch";
-      sha256 = "1ipgv1zn7vf7faxy29g95j4fi8w0zv62q85lyjac03lyh73j59xq";
-    })
-  ];
-  postPatch = ''
-    substituteInPlace setup.py --replace "immutables==0.6" "immutables"
-  '';
 
   dontUseSetuptoolsCheck = true;
   checkInputs = [
@@ -73,5 +65,6 @@ buildPythonPackage rec {
     homepage = "https://docs.rigetti.com/en/";
     license = licenses.asl20;
     maintainers = with maintainers; [ drewrisinger ];
+    broken = false; # generating parser fails on older versions of Lark parser. Exact version compatibility unknown
   };
 }
