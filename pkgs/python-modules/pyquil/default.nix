@@ -6,6 +6,7 @@
 , lark-parser
 , networkx
 , numpy
+, qcs-api-client
 , rpcq
 , requests
 , retry
@@ -14,6 +15,8 @@
 , pytestCheckHook
 , ipython
 , pytestcov
+, pytest-mock
+, pytest-httpx
 , requests-mock
 }:
 
@@ -31,7 +34,8 @@ buildPythonPackage rec {
   };
   postPatch = ''
     # remove numpy hard-pinning, not compatible with nixpkgs 20.09
-    substituteInPlace setup.py --replace ",>=1.20.0" ""
+    substituteInPlace setup.py --replace ",>=1.20.0" "" \
+      --replace "lark==0.*,>=0.11.1" "lark-parser"
   '';
 
   propagatedBuildInputs = [
@@ -39,17 +43,21 @@ buildPythonPackage rec {
     lark-parser
     networkx
     numpy
+    qcs-api-client
     requests
     retry
     rpcq
     scipy
   ];
 
+  doCheck = false; # tests are complex, seem to depend on certain processes/servers run in docker container.
   dontUseSetuptoolsCheck = true;
   checkInputs = [
     pytestCheckHook
     ipython
     pytestcov
+    pytest-mock
+    pytest-httpx
     requests-mock
   ];
   # Seem to require network connection??
