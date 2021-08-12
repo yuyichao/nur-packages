@@ -29,10 +29,12 @@ buildPythonPackage rec {
   # unpin max versions on packages
   postPatch = ''
     substituteInPlace setup.py \
-      --replace ",<0.16.0" "" \
-      --replace ",<2.0.0" "" \
-      --replace ",<21.0.0" "" \
-      --replace ",<0.11.0" ""
+      --replace "httpx>=0.15.0,<0.16.0" "httpx" \
+      --replace "pydantic>=1.7.2,<2.0.0" "pydantic" \
+      --replace "attrs>=20.1.0,<21.0.0" "attrs" \
+      --replace ",<0.11.0" "" \
+      --replace "toml>=0.10.2" "toml" \
+      --replace "iso8601>=0.1.13,<0.2.0" "iso8601"
   '';
 
   propagatedBuildInputs = [
