@@ -58,7 +58,6 @@ buildPythonPackage rec {
     "--durations=10"
     "--showlocals"
     "-vv"
-  ] ++ lib.optionals (lib.versionAtLeast lib.version "20.09") [
     "--ignore=test/connectors/test_torch_connector.py"  # TODO: fix, get multithreading errors with python3.9, segfaults
   ];
   disabledTests = [
