@@ -34,7 +34,8 @@ buildPythonPackage rec {
       --replace "attrs>=20.1.0,<21.0.0" "attrs" \
       --replace ",<0.11.0" "" \
       --replace "toml>=0.10.2" "toml" \
-      --replace "iso8601>=0.1.13,<0.2.0" "iso8601"
+      --replace "iso8601>=0.1.13,<0.2.0" "iso8601" \
+      --replace "pyjwt>=1.7.1,<2.0.0" "pyjwt"
   '';
 
   propagatedBuildInputs = [
