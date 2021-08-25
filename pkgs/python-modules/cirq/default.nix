@@ -155,6 +155,16 @@ let
         --replace 'pyquil~=3.0.0; python_version >= "3.7"' 'pyquil' \
         --replace 'pyquil~=2.28.2; python_version < "3.7"' ''' \
         --replace "rfc3339~=6.2" "rfc3339" \
+        --replace "toml~=0.10.2" "toml" \
+        --replace "six~=1.16.0" "six" \
+        --replace "rfc3986~=1.5.0" "rfc3986" \
+        --replace "httpcore~=0.11.1" "httpcore" \
+        --replace "pydantic~=1.8.2" "pydantic" \
+        --replace "sniffio~=1.2.0" "sniffio" \
+        --replace "certifi~=2021.5.30" "certifi" \
+        --replace "attrs~=20.3.0" "attrs" \
+        --replace "httpx~=0.15.5" "httpx" \
+        --replace "iso8601~=0.1.14" "iso8601" \
         --replace "~=" ">="
     '';
     propagatedBuildInputs = [
