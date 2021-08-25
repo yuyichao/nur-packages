@@ -16,10 +16,12 @@ rec {
           localPyPackage;
     in
     {
+      # Needed for nixpkgs < 21.05, older version incompatible with pyquil
+      lark-parser = overrideSuperVersionIfNewer py-super.lark-parser (py-self.callPackage ../pkgs/python-modules/lark-parser { });
       # Needed for nixpkgs < nixos-unstable
       docplex = overrideSuperVersionIfNewer py-super.docplex (py-self.callPackage ../pkgs/python-modules/docplex { });
-      yfinance = overrideSuperVersionIfNewer py-super.yfinance (py-self.callPackage ../pkgs/python-modules/yfinance { });
       websocket_client = overrideSuperVersionIfNewer py-super.websocket_client (py-self.callPackage ../pkgs/python-modules/websocket-client { });
+      yfinance = overrideSuperVersionIfNewer py-super.yfinance (py-self.callPackage ../pkgs/python-modules/yfinance { });
       # needed for nixpkgs < nixos-21.05, broken
       symengine = overrideSuperVersionIfNewer py-super.symengine (py-self.callPackage ../pkgs/python-modules/symengine { inherit (self) symengine; });
     };
