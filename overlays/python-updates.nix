@@ -16,8 +16,9 @@ rec {
           localPyPackage;
     in
     {
-      # Needed for nixpkgs < 21.05, older version incompatible with pyquil
+      # Needed for nixpkgs < 21.05, older version incompatible with pyquil/rigetti
       lark-parser = overrideSuperVersionIfNewer py-super.lark-parser (py-self.callPackage ../pkgs/python-modules/lark-parser { });
+      pydantic = overrideSuperVersionIfNewer py-super.pydantic (py-self.callPackage ../pkgs/python-modules/pydantic { });
       # Needed for nixpkgs < nixos-unstable
       docplex = overrideSuperVersionIfNewer py-super.docplex (py-self.callPackage ../pkgs/python-modules/docplex { });
       websocket_client = overrideSuperVersionIfNewer py-super.websocket_client (py-self.callPackage ../pkgs/python-modules/websocket-client { });
