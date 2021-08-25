@@ -27,6 +27,10 @@ buildPythonPackage rec {
     sha256 = "sha256-PEJOKf86ypPO8TqIJR+mqV80+1c8EDIr7fpoBV6Qwgc=";
   };
 
+  postPatch = ''
+    substituteInPlace requirements.txt --replace "cirq~=0.11.0" "cirq"
+  '';
+
   propagatedBuildInputs = [
     cirq
     deprecation
