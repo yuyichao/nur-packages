@@ -108,6 +108,10 @@ let
     disabledTests = [
       "test_metadata_search_path" # tries to import flynt, which isn't in Nixpkgs
       "test_benchmark_2q_xeb_fidelities" # fails due pandas MultiIndex. Maybe issue with pandas version in nix?
+    ] ++ lib.optionals (lib.versionAtLeast scipy.version "1.6.0") [
+      "test_projector_matrix_missing_qid"
+      "test_projector_from_np_array"
+      "test_projector_matrix"
     ] ++ lib.optionals stdenv.hostPlatform.isAarch64 [
       # Seem to fail due to math issues on aarch64?
       "expectation_from_wavefunction"
@@ -116,7 +120,8 @@ let
 
     meta = with lib; {
       description = "A framework for creating, editing, and invoking Noisy Intermediate Scale Quantum (NISQ) circuits.";
-      homepage = "https://github.com/quantumlib/cirq";
+      homepage = "https://quantumai.google/cirq";
+      downloadPage = "https://github.com/quantumlib/cirq";
       changelog = "https://github.com/quantumlib/Cirq/releases/tag/v${version}";
       license = licenses.asl20;
       maintainers = with maintainers; [ drewrisinger ];
