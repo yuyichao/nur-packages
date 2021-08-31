@@ -51,6 +51,7 @@ let
     changelog = "https://github.com/Qiskit/retworkx/releases/tag/${version}";
     license = licenses.asl20;
     maintainers = with maintainers; [ drewrisinger ];
+    broken = versionOlder lib.version "21.05";  # TODO: enable build on 20.09. Broken due to cargo resolving on older cargo version, might work with a Cargo.toml patch?
   };
 
   pre2105Package = rustPlatform.buildRustPackage rec {
