@@ -40,12 +40,12 @@
 }:
 
 let
-  version = "0.12.0";
+  version = "0.13.0";
   src = fetchFromGitHub {
     owner = "quantumlib";
     repo = "cirq";
     rev = "v${version}";
-    sha256 = "sha256-NPaADiRoPL0KoLugtk0vsnTGuRDK85e4j9kHv9aO/Po=";
+    sha256 = "sha256-01vlz6Y4/1LrfcJIXXhIC5H/bx/YrnYo/3aeKShm8cQ=";
   };
   disabled = pythonOlder "3.6";
   cirqSubPackage = { pname, ... } @ args: buildPythonPackage ((builtins.removeAttrs args [ ]) // rec {
