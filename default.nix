@@ -73,7 +73,7 @@ rec {
     pyvisa-py = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/pyvisa-py { inherit pyvisa; };
 
     # More recent version than in Nixpkgs
-    inherit (pkgs.python3.pkgs.callPackage ./pkgs/python-modules/cirq { inherit pyquil; })
+    inherit (pkgs.python3.pkgs.callPackage ./pkgs/python-modules/cirq { inherit duet pyquil; })
       cirq
       cirq-aqt
       cirq-core

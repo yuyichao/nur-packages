@@ -3,6 +3,7 @@
 , buildPythonPackage
 , pythonOlder
 , fetchFromGitHub
+, duet
 , google-api-core
 , matplotlib
 , networkx
@@ -70,6 +71,7 @@ let
     '';
 
     propagatedBuildInputs = [
+      duet
       matplotlib
       networkx
       numpy
