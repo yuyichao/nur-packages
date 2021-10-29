@@ -110,6 +110,7 @@ let
       "test_projector_matrix_missing_qid"
       "test_projector_from_np_array"
       "test_projector_matrix"
+      "test_projector_sum"
     ] ++ lib.optionals stdenv.hostPlatform.isAarch64 [
       # Seem to fail due to math issues on aarch64?
       "expectation_from_wavefunction"
