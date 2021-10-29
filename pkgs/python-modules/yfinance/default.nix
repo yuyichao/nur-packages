@@ -12,13 +12,13 @@
 
 buildPythonPackage rec {
   pname = "yfinance";
-  version = "0.1.63";
+  version = "0.1.64";
 
   src = fetchFromGitHub {
     owner = "ranaroussi";
     repo = pname;
-    rev = "6761b57f8b0be395d5337191fc8dfeebd01985fb"; # untagged :(
-    sha256 = "1n763nwffgzgdhi4qdwg04r7sfwln574wzn7ydmphibz3dlykr9m";
+    rev = "6654a41a8d5c0c9e869a9b9acb3e143786c765c7"; # untagged :(
+    sha256 = "03p43bg5zfih7513f9mnlq5hhsqwl53la0qajq51ax507vh2cvdf";
   };
 
   propagatedBuildInputs = [
