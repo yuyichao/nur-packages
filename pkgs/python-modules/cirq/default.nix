@@ -16,7 +16,6 @@
 , sympy
 , tqdm
 , typing-extensions
-  # cirq-rigetti
   # , idna
 , attrs
 , httpcore
@@ -41,12 +40,12 @@
 }:
 
 let
-  version = "0.13.0";
+  version = "0.13.1";
   src = fetchFromGitHub {
     owner = "quantumlib";
     repo = "cirq";
     rev = "v${version}";
-    sha256 = "sha256-01vlz6Y4/1LrfcJIXXhIC5H/bx/YrnYo/3aeKShm8cQ=";
+    sha256 = "sha256-MVfJ8iEeW8gFvCNTqrWfYpNNYuDAufHgcjd7Nh3qp8U=";
   };
   disabled = pythonOlder "3.6";
   cirqSubPackage = { pname, ... } @ args: buildPythonPackage ((builtins.removeAttrs args [ ]) // rec {
