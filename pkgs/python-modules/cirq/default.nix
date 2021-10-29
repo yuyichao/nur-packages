@@ -3,6 +3,7 @@
 , buildPythonPackage
 , pythonOlder
 , fetchFromGitHub
+, duet
 , google-api-core
 , matplotlib
 , networkx
@@ -15,7 +16,6 @@
 , sympy
 , tqdm
 , typing-extensions
-  # cirq-rigetti
   # , idna
 , attrs
 , httpcore
@@ -40,12 +40,12 @@
 }:
 
 let
-  version = "0.12.0";
+  version = "0.13.1";
   src = fetchFromGitHub {
     owner = "quantumlib";
     repo = "cirq";
     rev = "v${version}";
-    sha256 = "sha256-NPaADiRoPL0KoLugtk0vsnTGuRDK85e4j9kHv9aO/Po=";
+    sha256 = "sha256-MVfJ8iEeW8gFvCNTqrWfYpNNYuDAufHgcjd7Nh3qp8U=";
   };
   disabled = pythonOlder "3.6";
   cirqSubPackage = { pname, ... } @ args: buildPythonPackage ((builtins.removeAttrs args [ ]) // rec {
@@ -70,6 +70,7 @@ let
     '';
 
     propagatedBuildInputs = [
+      duet
       matplotlib
       networkx
       numpy
@@ -109,6 +110,7 @@ let
       "test_projector_matrix_missing_qid"
       "test_projector_from_np_array"
       "test_projector_matrix"
+      "test_projector_sum"
     ] ++ lib.optionals stdenv.hostPlatform.isAarch64 [
       # Seem to fail due to math issues on aarch64?
       "expectation_from_wavefunction"
