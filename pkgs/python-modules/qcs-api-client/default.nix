@@ -17,13 +17,13 @@
 
 buildPythonPackage rec {
   pname = "qcs-api-client";
-  version = "0.8.0";
+  version = "0.14.0";
 
   disabled = pythonOlder "3.6";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "68118137337b7ba1688d070bd276c40081938e145759b500699fcc2b941a0fb0";
+    sha256 = "sha256-CoiLMpaPRTISc0EO0jIMw/daTW8MyXQqaeGq0zaykmc=";
   };
 
   # unpin max versions on packages
