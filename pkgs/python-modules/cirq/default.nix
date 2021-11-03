@@ -23,7 +23,6 @@
 , pyjwt
 , pyquil
 , pyRFC3339
-, qcs-api-client ? null
 , retrying
 , toml
   # Contrib requirements
