@@ -2,6 +2,7 @@
 , buildPythonPackage
 , fetchPypi
 , gprof2dot
+, graphviz  # TODO: remove once https://github.com/NixOS/nixpkgs/pull/143220 gets to stable branch
 , pytest
 , setuptools-git
   # Check Inputs
@@ -22,6 +23,7 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     gprof2dot
     pytest
+    graphviz
   ];
 
   checkInputs = [ pytestCheckHook pytest-virtualenv ];
