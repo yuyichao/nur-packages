@@ -8,4 +8,4 @@ cat evaluations.json
 nix eval --json "(import ./ci.nix { }).allAttrPaths" > nurAttrs.json
 cat nurAttrs.json
 # run updates, exclude pyscf/pygsti-cirq
-jq "[.. | values | strings] | map(select(contains(\"pygsti-cirq\") or contains (\"pyscf\") | not)) | .[]" nurAttrs.json | xargs -L1 nix-update --commit
+jq '[.. | values | strings] | map(select(contains("pygsti-cirq") or contains ("pyscf") or contains("oitg") or contains ("libcint") | not)) | .[]' nurAttrs.json | xargs -L1 nix-update --commit
