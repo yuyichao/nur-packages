@@ -50,7 +50,6 @@ buildPythonPackage rec {
     ddt
     pylatexenc
   ];
-  dontUseSetuptoolsCheck = true;
 
   pythonImportsCheck = [ "qiskit_nature" ];
 

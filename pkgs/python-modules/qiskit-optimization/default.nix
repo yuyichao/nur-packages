@@ -48,7 +48,6 @@ buildPythonPackage rec {
     pylatexenc
     qiskit-aer
   ];
-  dontUseSetuptoolsCheck = true;
 
   pythonImportsCheck = [ "qiskit_optimization" ];
   pytestFlagsArray = [ "--durations=10" ];
