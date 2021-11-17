@@ -1,10 +1,11 @@
 { lib
 , pythonOlder
 , buildPythonPackage
-, fetchPypi
+, fetchFromGitHub
 , attrs
 , iso8601
 , httpx
+, poetry
 , pydantic
 , pyjwt
 , python-dateutil
@@ -13,29 +14,30 @@
 , toml
   # Check Inputs
 , pytestCheckHook
+, pytest-asyncio
+, respx
 }:
 
 buildPythonPackage rec {
   pname = "qcs-api-client";
-  version = "0.15.0";
+  version = "0.17.0";
+  format = "pyproject";
 
   disabled = pythonOlder "3.6";
 
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-NzfHemIYQq2quYs3RNKF7NHfR6Vi8Sx4eRTVT2pTEYk=";
+  src = fetchFromGitHub {
+    owner = "rigetti";
+    repo = "qcs-api-client-python";
+    rev = "v${version}";
+    sha256 = "sha256-MdEKZuGqAqvYAGt//bTEpC6ioIuhIjVVVrCjpsbkwMA=";
   };
+
+  nativeBuildInputs = [ poetry ];
 
   # unpin max versions on packages
   postPatch = ''
-    substituteInPlace setup.py \
-      --replace "httpx>=0.15.0,<0.16.0" "httpx" \
-      --replace "pydantic>=1.7.2,<2.0.0" "pydantic" \
-      --replace "attrs>=20.1.0,<21.0.0" "attrs" \
-      --replace ",<0.11.0" "" \
-      --replace "toml>=0.10.2" "toml" \
-      --replace "iso8601>=0.1.13,<0.2.0" "iso8601" \
-      --replace "pyjwt>=1.7.1,<2.0.0" "pyjwt"
+    substituteInPlace pyproject.toml \
+      --replace "^" ">="
   '';
 
   propagatedBuildInputs = [
@@ -50,8 +52,11 @@ buildPythonPackage rec {
     toml
   ];
 
-  doCheck = false;  # no tests included
-  # checkInputs = [ pytestCheckHook ];
+  checkInputs = [
+    pytestCheckHook
+    pytest-asyncio
+    respx
+  ];
   pythonImportsCheck = [ "qcs_api_client" ];
 
   meta = with lib; {
