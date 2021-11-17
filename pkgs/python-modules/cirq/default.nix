@@ -53,8 +53,7 @@ let
 
     propagatedBuildInputs = if pname != "cirq-core" then ((args.propagatedBuildInputs or [ ]) ++ [ cirq-core ]) else args.propagatedBuildInputs;
 
-    dontUseSetuptoolsCheck = true;
-    checkInputs = args.checkInputs or [ pytestCheckHook ];
+      checkInputs = args.checkInputs or [ pytestCheckHook ];
     # pythonImportsCheck = args.pythonImportsCheck or [ (builtins.replaceStrings [ "-" ] [ "_" ] pname) ];
     meta = args.meta or cirq-core.meta;
   }
@@ -212,8 +211,7 @@ let
       cirq-web
     ];
 
-    dontUseSetuptoolsCheck = true;
-    checkInputs = [ pytestCheckHook ];
+      checkInputs = [ pytestCheckHook ];
     pytestFlagsArray = [
       "--ignore=dev_tools"
     ];

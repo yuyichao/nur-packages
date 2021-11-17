@@ -21,7 +21,6 @@ buildPythonApplication rec {
     sha256 = "sha256-ilwZCIFM1k9o0mrB/DSlMaawtYR75mEjSfj0f2hjkxo=";
   };
 
-  dontUseSetuptoolsCheck = true;
   checkInputs = [ pytestCheckHook ];
   preCheck = "export PATH=$out/bin:$PATH";
 

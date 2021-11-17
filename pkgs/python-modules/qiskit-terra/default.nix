@@ -97,7 +97,6 @@ buildPythonPackage rec {
     nbconvert
     pytest_xdist
   ] ++ lib.optionals (!withVisualization) visualizationPackages;
-  dontUseSetuptoolsCheck = true;  # can't find setup.py, so fails. tested by pytest
 
   pythonImportsCheck = [
     "qiskit"

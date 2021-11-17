@@ -51,7 +51,6 @@ buildPythonPackage rec {
   ];
 
   doCheck = false;  # no tests included
-  dontUseSetuptoolsCheck = true;
   # checkInputs = [ pytestCheckHook ];
   pythonImportsCheck = [ "qcs_api_client" ];
 

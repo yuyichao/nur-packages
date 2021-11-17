@@ -41,7 +41,6 @@ buildPythonPackage rec {
   '';
 
   checkInputs = [ pytestCheckHook ];
-  dontUseSetuptoolsCheck = true;
   pytestFlagsArray = [ "./cvxpy" ];
   # Disable the slowest benchmarking tests, cuts test time in half
   disabledTests = [

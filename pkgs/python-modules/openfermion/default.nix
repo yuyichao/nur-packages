@@ -46,7 +46,6 @@ buildPythonPackage rec {
   ];
 
   # pythonImportsCheck = [ "openfermion" ]; # has troubles with cirq's import mechanism
-  dontUseSetuptoolsCheck = true;
   checkInputs = [ pytestCheckHook nbformat ];
 
   pytestFlagsArray = [

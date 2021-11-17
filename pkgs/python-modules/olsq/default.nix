@@ -42,7 +42,6 @@ buildPythonPackage rec {
     pytestCheckHook
     qiskit-ibmq-provider
   ];
-  dontUseSetuptoolsCheck = true;
 
   pythonImportsCheck = [ "olsq" ];
 

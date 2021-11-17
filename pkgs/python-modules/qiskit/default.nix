@@ -49,7 +49,6 @@ buildPythonPackage rec {
   ] ++ lib.optionals withOptionalPackages optionalQiskitPackages;
 
   checkInputs = [ pytestCheckHook ];
-  dontUseSetuptoolsCheck = true;
 
   pythonImportsCheck = [
     "qiskit"

@@ -27,7 +27,6 @@ buildPythonPackage rec {
   ];
 
   checkInputs = [ pytestCheckHook pytest-virtualenv ];
-  dontUseSetuptoolsCheck = true;
   pytestFlagsArray = [
     "--ignore=tests/integration/test_profile_integration.py"  # fails, virtualenv isn't working
   ];

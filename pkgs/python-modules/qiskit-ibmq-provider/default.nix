@@ -76,7 +76,6 @@ buildPythonPackage rec {
     vcrpy
     websockets
   ] ++ lib.optionals (!withVisualization) visualizationPackages;
-  dontUseSetuptoolsCheck = true;
 
   pythonImportsCheck = [ "qiskit.providers.ibmq" ];
   # These disabled tests require internet connection, aren't skipped elsewhere
