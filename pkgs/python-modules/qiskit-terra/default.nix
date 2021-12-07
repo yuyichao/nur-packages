@@ -5,8 +5,6 @@
   # Python requirements
 , cython
 , dill
-, fastjsonschema
-, jsonschema
 , numpy
 , networkx
 , ply
@@ -16,6 +14,7 @@
 , retworkx
 , scipy
 , scikit-quant ? null
+, stevedore
 , symengine
 , sympy
 , tweedledum
@@ -56,7 +55,7 @@ in
 
 buildPythonPackage rec {
   pname = "qiskit-terra";
-  version = "0.18.3";
+  version = "0.19.0";
 
   disabled = pythonOlder "3.6";
 
@@ -64,15 +63,13 @@ buildPythonPackage rec {
     owner = "Qiskit";
     repo = pname;
     rev = version;
-    sha256 = "sha256-w/EnkdlC1hvmLqm4I8ajEYADxqMYGdHKrySLcb/yWGs=";
+    sha256 = "sha256-WFUVynD6q+mQSq1ZznMUjPo5l48KxXuQuiYrrKwmvAM=";
   };
 
   nativeBuildInputs = [ cython ];
 
   propagatedBuildInputs = [
     dill
-    fastjsonschema
-    jsonschema
     numpy
     networkx
     ply
@@ -82,6 +79,7 @@ buildPythonPackage rec {
     retworkx
     scipy
     scikit-quant
+    stevedore
     symengine
     sympy
     tweedledum
@@ -164,7 +162,6 @@ buildPythonPackage rec {
     echo "Moving Qiskit test files to package directory"
     cp -r $TMP/$sourceRoot/test $PACKAGEDIR
     cp -r $TMP/$sourceRoot/examples $PACKAGEDIR
-    cp -r $TMP/$sourceRoot/qiskit/schemas/examples $PACKAGEDIR/qiskit/schemas/
 
     # run pytest from Nix's $out path
     pushd $PACKAGEDIR
