@@ -58,6 +58,9 @@ buildPythonPackage rec {
     respx
   ];
   pythonImportsCheck = [ "qcs_api_client" ];
+  disabledTests = lib.optionals (lib.versionAtLeast respx.version "0.17.0") [
+    "test_sync_client"  # don't seem to work on respx >= 0.17.0
+  ];
 
   meta = with lib; {
     description = "A client library for accessing the Rigetti QCS API";
