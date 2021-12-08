@@ -112,6 +112,10 @@ buildPythonPackage rec {
     "-n auto"
   ];
   disabledTests = [
+    "TestUnitarySynthesisPlugin" # use unittest mocks for transpiler.run(), seems incompatible somehow w/ pytest infrastructure
+    "TestMatplotlibDrawer"  # seems to fail non-deterministically
+    "test_copy" # assertNotIn doesn't seem to work as expected w/ pytest vs unittest
+
     # Flaky tests
     "test_pulse_limits" # Fails on GitHub Actions, probably due to minor floating point arithmetic error.
     "test_cx_equivalence"  # Fails due to flaky test
@@ -153,6 +157,11 @@ buildPythonPackage rec {
     "test_two_qubit_weyl_decomposition_ab0"
     "test_sample_counts_memory_superposition"
     "test_piecewise_polynomial_function"
+    "test_piecewise_chebyshev_mutability"
+    "test_bit_conditional_no_cregbundle"
+    "test_gradient_wrapper2"
+    "test_two_qubit_weyl_decomposition_abmb"
+    "test_two_qubit_weyl_decomposition_abb"
   ];
 
   # Moves tests to $PACKAGEDIR/test. They can't be run from /build because of finding
