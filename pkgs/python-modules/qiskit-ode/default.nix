@@ -13,7 +13,7 @@
 
 buildPythonPackage rec {
   pname = "qiskit-ode";
-  version = "unstable-0.1.0";
+  version = "unstable-0.2.0";
   format = "pyproject";
 
   disabled = pythonOlder "3.6";
