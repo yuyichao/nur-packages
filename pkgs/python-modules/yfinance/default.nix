@@ -12,13 +12,13 @@
 
 buildPythonPackage rec {
   pname = "yfinance";
-  version = "0.1.67";
+  version = "0.1.69";
 
   src = fetchFromGitHub {
     owner = "ranaroussi";
     repo = pname;
     rev = version;
-    sha256 = "163869cxs4mv7qmzjnvca95y746ggfh3xc7ha85ih455fy2r41a3";
+    sha256 = "sha256-Q1dJ76NgqOBGPe+NjA2s0HigGK7IkbMRXY8LlAK454A=";
   };
 
   propagatedBuildInputs = [
@@ -31,7 +31,8 @@ buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace setup.py \
-      --replace "lxml>=4.5.1" "lxml"
+      --replace "lxml>=4.5.1" "lxml" \
+      --replace "requests>=2.26" "requests"
   '';
 
   # Tests
