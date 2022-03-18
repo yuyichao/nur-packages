@@ -4,6 +4,7 @@
 , pythonOlder
 # Python dependencies
 , cython
+, csaps
 , deap
 , ipython
 , notebook
@@ -59,6 +60,7 @@ buildPythonPackage rec {
   ];
 
   propagatedBuildInputs = [
+    csaps
     numpy
     plotly
     ply
