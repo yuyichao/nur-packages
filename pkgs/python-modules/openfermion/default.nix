@@ -60,6 +60,10 @@ buildPythonPackage rec {
     "test_all"
     "test_apply_constraints"
     "test_plane_wave_hamiltonian"
+  ] ++ lib.optionals (lib.versionAtLeast cirq.version "0.14.0") [
+    # these fail for some reason on cirq 0.14.0. Reported in https://github.com/quantumlib/OpenFermion/issues/775
+    "test_fermionic_simulation_gate"
+    "test_quartic_fermionic_simulation_consistency"
   ] ++ lib.optionals (lib.versionAtLeast cirq.version "0.11.1") [
     "test_cirq_deprecations"
   ]
