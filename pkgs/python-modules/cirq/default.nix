@@ -63,7 +63,8 @@ let
       substituteInPlace requirements.txt \
         --replace "matplotlib~=3.0" "matplotlib" \
         --replace "networkx~=2.4" "networkx" \
-        --replace "numpy~=1.16" "numpy"
+        --replace "numpy~=1.16" "numpy" \
+        --replace "sympy<1.10" "sympy"
 
       # test was written to expect the dev version, but fails when built against the release version
     '';
