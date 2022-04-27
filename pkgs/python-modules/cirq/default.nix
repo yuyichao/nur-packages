@@ -207,6 +207,17 @@ let
     pname = "cirq";
     inherit version src disabled;
 
+    # compatibility with setuptools >= 61.0.0. See https://github.com/quantumlib/Cirq/issues/5291
+    postPatch = ''
+      cat <<EOF >> setup.cfg
+      [options]
+      packages = find:
+
+      [options.packages.find]
+      exclude = check,rtd_docs,dev_tools,cirq*,benchmarks,examples
+      EOF
+    '';
+
     preCheck = ''
       rm -rf cirq-aqt
       rm -rf cirq-core
@@ -227,7 +238,7 @@ let
       cirq-web
     ];
 
-      checkInputs = [ pytestCheckHook ];
+    checkInputs = [ pytestCheckHook ];
     pytestFlagsArray = [
       "--ignore=dev_tools"
     ];
