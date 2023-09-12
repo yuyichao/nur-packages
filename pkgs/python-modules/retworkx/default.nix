@@ -28,7 +28,7 @@ let
     sha256 = "0adb9zar8wihjkywal13b6w21hf5z9fh168wnc7j045y2ixw6vnm";
   };
   oldCargoSha = "0bhwggx5ni24wj637q6n2lvbc3sj8sqn8b2v5dd0b18ng8yn8rdf";
-  newCargoSha = "09zmp4zf3r3b7ffgasshr21db7blkwn7wkibka9cbh61593845dh";
+  newCargoSha = "1jkdf3arh57jxp664pbdvcximxr2ylnkvng73n6p74z5ma77p6fb";
   buildInputs = lib.optionals stdenv.isDarwin [ libiconv ];
   installCheckInputs = [
     pytestCheckHook
